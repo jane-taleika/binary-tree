@@ -7,44 +7,62 @@ class BinaryTree {
   }
 
   insert(data) {
-    var node = new Node(data,null,null);
+
     var root = this.root;
-    var cur;
 
-    if (!root)
-      this.root=node;
-    else
-    {
-      cur=root;
-      while (true)
-      {
-        if (data<cur.data)
-        {
-          if(!cur.left){
-                cur.left = newNode;
-                break;
-              }
-              else 
-                cur=cur.left;
-        }
-        else if (data>cur.data)
-        {
-          if(!cur.right)
-          {
-            cur.rirght=node;
-            break;
-          }
-          else
-            cur=cur.right;
-        }
-
-      }
+    if (!root) {
+      this.root = new Node(data,null,null);
+      return;
     }
 
+    var cur = root;
+     var node = new Node(data,null,null);
+
+    while(cur){
+          if(data < cur.data){
+            if(!cur.left){
+                cur.left = node;
+                break;
+              }
+
+              else{
+                cur = cur.left;
+            }
+        }
+
+        else{
+
+            if(!cur.right){
+                cur.right = node;
+                break;
+            }
+
+            else{
+                cur = cur.right;
+            }
+        }
+      }
   }
 
-  contains(data) {
 
+  contains(data) {
+    var found = false;
+    var cur=this.root;
+     while(!found && cur)
+     {
+      if (data<cur.data)
+      {
+        cur=cur.left;
+      }
+      else if (data>cur.data)
+      {
+        cur=cur.right;
+      }
+      else{
+        found=true;
+      }
+     }
+return found;
   }
 
   remove(data) {
